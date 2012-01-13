@@ -425,6 +425,10 @@
     private function onPagination( e:Event ):void
     {
       par.goToPage( e.target.curPage );
+	  if (Main.wrapper)
+	  {
+		  Main.wrapper.external.scrollWindow(0);
+	  }
     }
     
     private function onBox( e:Event ):void
