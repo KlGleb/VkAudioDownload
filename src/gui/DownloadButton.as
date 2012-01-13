@@ -16,12 +16,16 @@ package gui {
 	 * @author Gleb Klimov, http://vk.com/klgleb
 	 */
 	public class DownloadButton extends Sprite {
+		private const LOADER_HEIGHT:uint = 8;
+		
 		private var _url:String;
 		private var _title:String;
 		
 		private var _btn_download:*;
 		
 		private var file:FileReference;
+		
+		
 		
 		public function DownloadButton(url:String, title:String) {
 			_url = url;
@@ -85,9 +89,11 @@ package gui {
 		}
 		
 		private function _completeHandler(e:Event):void {
-			var txt:* = VK.addText("Готово", 0, 0, 0xFFFFFF);
+			graphics.clear();
+			var txt:* = VK.addText("Скачано", 0, 0, 0x777777);
 			txt.x = width / 2 - txt.width / 2;
-			addChild(txt);
+			addChild(txt);			
+			return;
 			
 			var t:Timer = new Timer(1000, 1);
 			t.addEventListener(TimerEvent.TIMER_COMPLETE, 
@@ -118,8 +124,9 @@ package gui {
 			}
 			v = Math.max(0, Math.min(1, v));
 			
-			VK.Utils.rect(this, 0, 0, _btn_download.width, _btn_download.height, VK.Utils.ARROW_BG_COL, VK.Utils.BORDER_COL);
-			VK.Utils.fillRect(this, 0, 0, _btn_download.width * v, _btn_download.height, VK.Utils.BLUE_TXT_COL);
+			var k_y:uint =  int(height / 2 - LOADER_HEIGHT / 2);
+			VK.Utils.rect(this, 0, k_y, _btn_download.width, LOADER_HEIGHT, VK.Utils.ARROW_BG_COL, VK.Utils.BORDER_COL);
+			VK.Utils.fillRect(this, 0, k_y, _btn_download.width * v, LOADER_HEIGHT, VK.Utils.BLUE_TXT_COL);
 			
 		}
 		
