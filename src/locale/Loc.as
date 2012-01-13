@@ -33,7 +33,8 @@
       if ( !(Main.wrapper is Stage)  &&  cur.audiotrack is Array )
         return Main.wrapper.lang.langNumeric( count, cur.audiotrack );
       
-      return "Audio File(s)";
+      //return "Audio File(s)";
+      return _padej(count, "Аудиозапись", "Аудиозаписи", "Аудиозаписей");
     }
 
     
@@ -81,5 +82,28 @@
       cur.close = "Закрыть";
 
     }
+	
+	/**
+	 * Склоняет строковое значение, зависящее от числа
+	 * @param	count 
+	 * @param	nominative им.п./ед.ч. (одна банкнота)
+	 * @param	genitive_singular род.п./ед.ч. (две банкноты)
+	 * @param	genitive_plural род.п./мн.ч. (стопитцот банкнот)
+	 */
+	private static function _padej(count:int, nominative:String, genitive_singular:String, genitive_plural:String):String {
+		var result:String = "";
+		var last_digit:int = count % 10;
+		var last_two_digits:int = count % 100;
+		if ((last_digit == 1) && (last_two_digits != 11) ) { 
+			result = nominative;
+		}else if (( (last_digit == 2) && (last_two_digits != 12)) || ((last_digit == 3) && (last_two_digits != 13)) || ((last_digit == 4) && (last_two_digits != 14))) {
+			 result = genitive_singular;
+
+		}else { 
+			result = genitive_plural;
+		}
+		
+		return(result);
+	}
   }
 }
