@@ -17,6 +17,7 @@
   import flash.net.URLRequestMethod;
   import flash.text.TextField;
   import flash.utils.Timer;
+  import gui.DownloadButton;
 
   import locale.Loc;
   import vk.VK;
@@ -67,6 +68,7 @@
     private var but_restore:* = null;
     private var but_add:* = null;
     private var but_title:* = null;
+	private var but_download:DownloadButton = null;
 
     public var lyrics:String = null;
     
@@ -134,6 +136,31 @@
         but_add.addEventListener( MouseEvent.CLICK, onButAdd );
         addChild( but_add );
       }
+	  
+	   //Download button
+	   if ( !editMode )
+	   {
+		   	//but_download = VK.createLinkButton("Скачать", 0, 10);
+		   	but_download = new DownloadButton(descr.url, descr.artist + " - " + descr.title);
+			but_download.x = ww + 97 - but_download.width;
+			but_download.y = 10;
+			
+			if ( but_add )
+			{
+				but_download.x = but_add.x - but_download.width - 5;
+			}
+			addChild(but_download);
+			
+			if (but_add)
+			{
+				var sep = new Sprite();
+				VK.Utils.vertSeparator( sep, 0, 0 );
+				sep.x = but_download.x + but_download.width + (but_add.x - (but_download.x + but_download.width)) / 2 - sep.width / 2;
+				sep.y = but_download.y + but_download.height / 2 - sep.height / 2 ;
+				addChild(sep);
+			}
+	   }
+
       
       // Other Buttons
       if ( editMode )
@@ -170,12 +197,6 @@
 	  var txt_duration:DisplayObject = VK.addText( s, linesW + 32, 5, 0x777777, 0, 0, 0, 10 );
       header.addChild(txt_duration);
       
-	  //Download button
-	  var download_button:DisplayObject = VK.createLinkButton("Скачать", 0, 5);
-	  download_button.x = linesW - download_button.width;
-	  
-	  //header.addChild(download_button);
-	  
       // ProgressLine and VolumeLine
       lines = new Sprite();
       lines.x = 34;
@@ -454,7 +475,29 @@
     
     private function get linesW():uint
     {
-      return ww + 10 - (but_add ? but_add.width + 15 : 0);
+      //return ww + 10 - (but_add ? but_add.width + 15 : 0);
+	  var btns:Array = [but_download, but_add];
+	  var p_x:int = 5000;
+	  
+	  for each(var btn:* in btns) 
+	  {
+		 if (btn)
+			p_x = Math.min(p_x, btn.x);
+	  }
+	  
+	  return ww - (Main.WIDTH - p_x) + 10;
+	  /*
+	  if (but_download)
+	  {
+		  return ww + 10 - ( but_download ? but_download.width + 15 : 0);
+	  }else if (but_add)
+	  {
+		return ww + 10 - (but_add ? but_add.width + 15 : 0); 
+	  }else
+	  {
+		  return ww + 10;  
+	  }*/
+      
     }
     
     private function releaseSong():void

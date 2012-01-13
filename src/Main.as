@@ -38,7 +38,7 @@
     
     public static var wrapper:* = null;
     public static var STAGE:* = null;
-    public static const WIDTH:uint = 827; // Best looks with  WIDTH >= 350
+    public static const WIDTH:uint = 727; // Best looks with  WIDTH >= 350
     public static const BG_COLOR:uint = 0xffffff;
     public static const HEADER_H:uint = 33;
     public static const PLAYPAUSE_IMG_SCALE:Number = 0.615385;
@@ -168,6 +168,8 @@
     {
       //Dbg.log( "onVKLoaded(), cur_full_loc " + cur_full_loc );
       
+	  VK.Utils.fillRect(this, 0, 0, WIDTH, 5000, 0xFFFFFF);
+	  
       // Create MainMenu
       menu = VK.createMainMenu( wrapper, true );
       menu.addItem( Loc.cur.myAudio, "my", false );
