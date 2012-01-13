@@ -24,11 +24,16 @@
   public class Main extends Sprite
   {
     private static const VER:String = "0.2";
-    private static const MY_ID:uint = 5005272; // For local testing please change this to your ID
-    private static const MY_APP_ID:uint = 1732516; // For local testing please change this to your APP_ID
-    private static const MY_SECRET:String = "JLutLcTbZR"; // Please change this to your application secret key
-    internal static const TEST_MODE:Boolean = false; // For local testing please change this to "true"
+	
+	//For local testing please change there:
+    private static const MY_ID:uint = 169003; // Please change this to your ID
+    private static const MY_APP_ID:uint = 2754884; // Please change this to your APP_ID
+    private static const MY_SECRET:String = "af51a171f3"; // Please change this to your secret (flashvars parameter)
+    private static const MY_SID:String = "2184ce12f7ca267d3ffba9ea3baf0f23578dcfa64458b72a82952946c80f18"; // Please change this to your sid (flashvars parameter) 
+	
+    internal static const TEST_MODE:Boolean = false; 
     
+	
     private static const MIN_HEIGHT:uint = 50;
     
     public static var wrapper:* = null;
@@ -122,12 +127,16 @@
       viewer_id = getFlashVarInt( "viewer_id" );
       var api_url:String = vars['api_url'];
       var api_res:String = vars['api_result'];
+      var sid:String = vars['sid'];
+      var secret:String = vars['secret'];
       
       if ( viewer_id == 0 ) // Local testing
       {
         viewer_id = MY_ID;
         user_id = MY_ID;
-        app_id = MY_APP_ID;
+        app_id = MY_APP_ID;		
+		secret = MY_SECRET;
+		sid = MY_SID;
         api_url = "http://api.vkontakte.ru/api.php";
       }
       
@@ -135,7 +144,7 @@
         user_id = viewer_id;
         
       // Create VK API manager
-      vkApi = new VkApi( this, api_url, viewer_id, app_id, MY_SECRET );
+      vkApi = new VkApi( this, api_url, viewer_id, app_id, secret, sid );
       
       // Get location strings
       if ( api_res  &&  api_res.indexOf( "\"error\"" ) == -1 )

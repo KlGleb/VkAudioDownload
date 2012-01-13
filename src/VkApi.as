@@ -23,7 +23,8 @@
     private var viewer_id:int = 0;
     private var app_id:int = 0;
     private var secret:String = null;
-    
+    private var sid:String = null;
+	
     private var timer:Timer = null;
     
     private var rqCommon:BkRequest = null;
@@ -43,16 +44,17 @@
     private static const AUDIO_RESTORE:uint = 408;
     private static const AUDIO_EDIT:uint = 409;
     private static const AUDIO_REORDER:uint = 410;
-
+	
 
     //
-    public function VkApi( par:*, api_url:String, viewer_id:int, app_id:int, secret:String ):void
+    public function VkApi( par:*, api_url:String, viewer_id:int, app_id:int, secret:String, sid:String ):void
     {
       this.par = par;
       this.api_url = api_url;
       this.viewer_id = viewer_id;
       this.app_id = app_id;
       this.secret = secret;
+	  this.sid = sid;
     }
 
     // ------------------------------------------------------------------------------ Common methods.
@@ -186,8 +188,9 @@
     {
       par.enGui( false );
       
-      arr.push( {pn: "api_id", pv: app_id } );
-      arr.push( {pn: "v", pv: "2.0"} );
+      arr.push( { pn: "api_id", pv: app_id } );
+	  arr.push( {pn: "sid", pv: sid} );
+      arr.push( {pn: "v", pv: "3.0"} );      
       arr.push( {pn: "format", pv: "JSON" } );
       
       //var timestamp:int = new Date().valueOf();
@@ -228,9 +231,11 @@
     private function makeSig( arr:Array ):String
     {
       var sig:String = "" + viewer_id;
-      for( var i:uint = 0; i < arr.length; i++ )
-        sig += arr[i].pn + "=" + arr[i].pv;
-      
+      for ( var i:uint = 0; i < arr.length; i++ )
+	  {
+		if(arr[i].pn != "sid" )
+			sig += arr[i].pn + "=" + arr[i].pv;
+      }
       sig += secret;
       
       //Dbg.log( "vkApi.SIG: " + sig );
