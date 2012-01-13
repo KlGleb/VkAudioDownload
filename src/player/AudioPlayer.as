@@ -147,7 +147,7 @@
 			
 			if ( but_add )
 			{
-				but_download.x = but_add.x - but_download.width - 5;
+				but_download.x = but_add.x - but_download.width - 7;
 			}
 			addChild(but_download);
 			
