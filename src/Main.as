@@ -612,7 +612,7 @@
       cm.hideBuiltInItems();
       var cmi1:ContextMenuItem = new ContextMenuItem( "Player version: " + VER );
       var cmi2:ContextMenuItem = new ContextMenuItem( "by Alexey Kharkov" );
-	  var cmi3:ContextMenuItem = new ContextMenuItem( "Source (github)" );
+
 	  
       cmi1.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
       {
@@ -624,15 +624,23 @@
           navigateToURL( new URLRequest( "id5005272" ), "_blank" );
       });
 	  
+	  var cmi3:ContextMenuItem = new ContextMenuItem( "Source (github)" );
 	  cmi3.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
       {
           navigateToURL( new URLRequest( "https://github.com/KlGleb/VkAudioDownload" ), "_blank" );
+      });
+	  
+	  var cmi4:ContextMenuItem = new ContextMenuItem( "На основе приложения \"Аудиозаписи\"" );
+	  cmi4.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
+      {
+          navigateToURL( new URLRequest( "http://vkontakte.ru/page-1_8452933" ), "_blank" );
       });
 	  
 	  
       /*cm.customItems.push( cmi1 );
       cm.customItems.push( cmi2 );*/
       cm.customItems.push( cmi3 );
+      cm.customItems.push( cmi4 );
       contextMenu = cm;
     }
     

@@ -153,7 +153,7 @@
 			
 			if (but_add)
 			{
-				var sep = new Sprite();
+				var sep:Sprite = new Sprite();
 				VK.Utils.vertSeparator( sep, 0, 0 );
 				sep.x = but_download.x + but_download.width + (but_add.x - (but_download.x + but_download.width)) / 2 - sep.width / 2;
 				sep.y = but_download.y + but_download.height / 2 - sep.height / 2 ;

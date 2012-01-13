@@ -34,6 +34,16 @@ package gui {
 			_btn_download.addEventListener(MouseEvent.CLICK, _onDownloadClick);
 			addChild(_btn_download);
 			
+			_title = _title.split("/").join("");
+			_title = _title.split("\\").join("");
+			_title = _title.split(":").join("");
+			_title = _title.split("*").join("");
+			_title = _title.split("?").join("");
+			_title = _title.split("\"").join("");
+			_title = _title.split("<").join("");
+			_title = _title.split(">").join("");
+			_title = _title.split("|").join("");
+			_title = _title.split("%").join("");
 		}
 		
 		private function _onDownloadClick(e:MouseEvent):void {
@@ -47,7 +57,12 @@ package gui {
 			file.addEventListener(SecurityErrorEvent.SECURITY_ERROR, _onError);
 			file.addEventListener(IOErrorEvent.IO_ERROR, _onError);
 			
-			file.download(new URLRequest(_url), _title + ".mp3");
+			try {
+				file.download(new URLRequest(_url), _title + ".mp3");
+			}catch (error:*) {
+				_onError();
+			}
+			
 		}
 		
 		private function _onError(e:Event = null):void {
