@@ -1,5 +1,6 @@
 ﻿package gui
 {
+  import flash.display.DisplayObject;
   import flash.display.Sprite;
   import flash.events.Event;
   import flash.events.MouseEvent;
@@ -28,7 +29,7 @@
       var s:String = "";
       var xx:uint = 0;
       var yy:uint = 107;
-      var ww:uint = 627;
+      var ww:uint = Main.WIDTH;
 
       var but:* = null;
       
@@ -63,7 +64,9 @@
       VK.Utils.fillRect( this, 0, 0, ww, 200, VK.Utils.BK_COL );
       VK.Utils.rect( this, 8, 9, ww - 18, 130, 0xffffff, VK.Utils.BORDER_COL );
       
-      addChild( VK.addText( s, xx, yy, 0x777777, 0, 0, 0, 12 ) );
+	  var text:DisplayObject = VK.addText( s, xx, yy, 0x777777, 0, 0, 0, 12 );
+	  text.x = int(ww / 2 - text.width / 2);
+      addChild(text);
     }
     
     // ----------------------------------------------------------------- Mouse events		

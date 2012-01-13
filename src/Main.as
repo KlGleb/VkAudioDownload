@@ -38,7 +38,7 @@
     
     public static var wrapper:* = null;
     public static var STAGE:* = null;
-    public static const WIDTH:uint = 627; // Best looks with  WIDTH >= 350
+    public static const WIDTH:uint = 827; // Best looks with  WIDTH >= 350
     public static const BG_COLOR:uint = 0xffffff;
     public static const HEADER_H:uint = 33;
     public static const PLAYPAUSE_IMG_SCALE:Number = 0.615385;
@@ -176,6 +176,8 @@
       menu.addItem( Loc.cur.newAudio, "new" );
       menu.addEventListener( Event.CHANGE, onMenu );
       addChild( menu );
+	  
+	  //VK.Utils.horLine(this, 0, WIDTH, menu.y + menu.height, VK.Utils.BLUE_TXT_COL);
       
       // Create "Play-Pause" image on the main menu
       img = new PlayPauseImg();
@@ -555,6 +557,8 @@
       
       VK.Utils.fillRect( sp, 0, 0, WIDTH, y4, 0xf7f7f7 ); // Global gray background
       VK.Utils.fillRect( sp, 0, y1, WIDTH, y2 - y1, 0xf7f7f7 ); // Gray background for AudioPlayers
+	  
+	  
       if ( cur_players != null  &&  !cur_players.editMode )
       {
         var y5:uint = y1 + 9 + (search ? 30 : 0) + ((justLoaded  &&  menu.selectedLocation == "my") ? 39 : 0);
@@ -562,6 +566,8 @@
       }
       
       VK.Utils.rect( sp, -1, 0, WIDTH + 2, y1, 0xffffff, VK.Utils.BORDER_COL ); // White fields for UP pagination
+	  VK.Utils.horLine(sp, -1, WIDTH + 2, 0, VK.Utils.BLUE_TXT_COL); 
+	  
       if ( isPagination )
         VK.Utils.rect( sp, -1, y2, WIDTH + 2, y3 - y2 - 1, 0xffffff, VK.Utils.BORDER_COL ); // White fields for DOWN pagination
       
@@ -604,16 +610,27 @@
       cm.hideBuiltInItems();
       var cmi1:ContextMenuItem = new ContextMenuItem( "Player version: " + VER );
       var cmi2:ContextMenuItem = new ContextMenuItem( "by Alexey Kharkov" );
+	  var cmi3:ContextMenuItem = new ContextMenuItem( "Source (github)" );
+	  
       cmi1.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
       {
           navigateToURL( new URLRequest( "http://vkontakte.ru" ), "_blank" );
       });
+	  
       cmi2.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
       {
           navigateToURL( new URLRequest( "id5005272" ), "_blank" );
       });
-      cm.customItems.push( cmi1 );
-      cm.customItems.push( cmi2 );
+	  
+	  cmi3.addEventListener( ContextMenuEvent.MENU_ITEM_SELECT, function(e:ContextMenuEvent):void
+      {
+          navigateToURL( new URLRequest( "https://github.com/KlGleb/VkAudioDownload" ), "_blank" );
+      });
+	  
+	  
+      /*cm.customItems.push( cmi1 );
+      cm.customItems.push( cmi2 );*/
+      cm.customItems.push( cmi3 );
       contextMenu = cm;
     }
     

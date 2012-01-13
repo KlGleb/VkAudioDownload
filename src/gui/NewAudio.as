@@ -19,7 +19,7 @@
     public static const EVENT_SEARCH:String = "search";
     public static const EVENT_UPLOADED:String = "uploaded";
     
-    private static const W:uint = 537;
+    private static const W:uint = Main.WIDTH - 90;
     private static const H:uint = 330;
     private static const X:uint = 120;
     private static const Y:uint = 57;
@@ -42,12 +42,13 @@
       rq.method = URLRequestMethod.POST;
       rq.requestHeaders.push( new URLRequestHeader( "Cache-Control", "no-cache" ) );
       
-      VK.Utils.fillRect( this, 0, 0, 627, H, 0xf7f7f7 );
+      VK.Utils.fillRect( this, 0, 0, Main.WIDTH, H, 0xf7f7f7 );
       VK.Utils.rect( this, 45, 27, W, H - 45, 0xffffff, 0xcccccc );
-      VK.Utils.horLine( this, X, 507, Y + 19, 0xb9c4da );
+      VK.Utils.horLine( this, X, W - 30, Y + 19, 0xb9c4da );
       
       VK.Utils.fillRect( this, X + 5, Y + 62, 4, 4, 0x758eac );
       VK.Utils.fillRect( this, X + 5, Y + 77, 4, 4, 0x758eac );
+	  VK.Utils.horLine( this, -1, Main.WIDTH + 2, 0, VK.Utils.BLUE_TXT_COL); 
       
       addChild( VK.addText( Loc.cur.chooseFile, X, Y, VK.Utils.BLUE_TXT_COL, VK.Utils.TXT_BOLD, 0, 0, 13 ) );
       addChild( VK.addText( Loc.cur.restrict, X, Y + 35, VK.Utils.BLUE_TXT_COL, VK.Utils.TXT_BOLD, 0, 0, 11 ) );
@@ -56,12 +57,12 @@
       addChild( VK.addText( Loc.cur.restrict2 + ".", X + 17, Y + 70 ) );
       
       but_select = VK.createRoundButton( Loc.cur.chooseF, 0, Y + 133 );
-      but_select.x = Math.round( (627 - but_select.width) / 2 );
+      but_select.x = Math.round( (Main.WIDTH - but_select.width) / 2 );
       addChild( but_select );
       but_select.addEventListener( MouseEvent.CLICK, onSelectFile );
       
       but_cancel = VK.createRoundButton( Loc.cur.cancel, 0, but_select.y + 11, VK.GRAY_BUTTON );
-      but_cancel.x = Math.round( (627 - but_cancel.width) / 2 );
+      but_cancel.x = Math.round( (Main.WIDTH - but_cancel.width) / 2 );
       but_cancel.visible = false;
       addChild( but_cancel );
       but_cancel.addEventListener( MouseEvent.CLICK, cancelHandler );
@@ -84,12 +85,12 @@
       but_select.visible = !uploading;
       but_cancel.visible = uploading;
       
-      VK.Utils.rect( this, X + 17, Y + 110, 353, 66, 0xf7f7f7, 0xcccccc );
+      VK.Utils.rect( this, X + 17, Y + 110, W - 184, 66, 0xf7f7f7, 0xcccccc );
       if ( uploading )
       {
         const xx:uint = X + 27;
         const yy:uint = Y + 120;
-        const w:uint = 333;
+        const w:uint = Main.WIDTH - 294;
         const h:uint = 14;
         
         VK.Utils.rect( this, xx, yy, w, h, 0xffffff, 0xcccccc );

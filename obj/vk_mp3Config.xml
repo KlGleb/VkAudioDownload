@@ -30,7 +30,7 @@
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
   <default-size>
-    <width>627</width>
+    <width>827</width>
     <height>800</height>
   </default-size>
 </flex-config>

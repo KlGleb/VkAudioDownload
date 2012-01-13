@@ -1,5 +1,6 @@
 ﻿package player
 {
+  import flash.display.DisplayObject;
   import flash.display.MovieClip;
   import flash.display.Sprite;
   import flash.events.Event;
@@ -166,8 +167,15 @@
       var t1:uint = Math.floor( descr.duration / 60 );
       var t2:uint = descr.duration % 60;
       var s:String = t1 + ":" + ((t2 < 10) ? "0" : "") + t2;
-      header.addChild( VK.addText( s, linesW + 32, 5, 0x777777, 0, 0, 0, 10 ) );
+	  var txt_duration:DisplayObject = VK.addText( s, linesW + 32, 5, 0x777777, 0, 0, 0, 10 );
+      header.addChild(txt_duration);
       
+	  //Download button
+	  var download_button:DisplayObject = VK.createLinkButton("Скачать", 0, 5);
+	  download_button.x = linesW - download_button.width;
+	  
+	  //header.addChild(download_button);
+	  
       // ProgressLine and VolumeLine
       lines = new Sprite();
       lines.x = 34;
