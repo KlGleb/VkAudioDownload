@@ -391,10 +391,13 @@ public class VkApi {
 
         for (var i:int = from; i < res.length; ++i) {
             var p:* = res[i];
-            audios.push({
-                "url": p.url, "aid": p.aid, "owner_id": p.owner_id, "artist": delQuotes(p.artist),
-                "title": delQuotes(p.title), "duration": p.duration, "lyrics_id": p.lyrics_id
-            });
+            try {
+                audios.push({
+                    "url": p.url, "aid": p.aid, "owner_id": p.owner_id, "artist": delQuotes(p.artist),
+                    "title": delQuotes(p.title), "duration": p.duration, "lyrics_id": p.lyrics_id
+                });
+            } catch (e:Error) {
+            }
         }
 
         totalCount = Math.min(Math.max(audios.length, totalCount), 1000);

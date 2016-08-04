@@ -23,13 +23,13 @@ import locale.Loc;
  * @author Alexey Kharkov
  */
 public class Main extends Sprite {
-    private static const VER:String = "0.2";
+    private static const VER:String = "0.3";
 
     //For local testing please change there:
     private static const MY_ID:uint = 169003; // Please change this to your ID
     private static const MY_APP_ID:uint = 2754884; // Please change this to your APP_ID
-    private static const MY_SECRET:String = "af51a171f3"; // Please change this to your secret (flashvars parameter)
-    private static const MY_SID:String = "2184ce12f7ca267d3ffba9ea3baf0f23578dcfa64458b72a82952946c80f18"; // Please change this to your sid (flashvars parameter) 
+    private static const MY_SECRET:String = "18168fdb8f"; // Please change this to your secret (flashvars parameter)
+    private static const MY_SID:String = "7785482915b317ca73ead9b5ee4a0ec9904237f4f4cdf23c1121773b3d6d41d47c538d071784046d73383"; // Please change this to your sid (flashvars parameter)
 
     internal static const TEST_MODE:Boolean = false;
 
@@ -557,7 +557,7 @@ public class Main extends Sprite {
             case "search":
                 cont_search = cur_cont;
                 break;
-            //case "my":
+                //case "my":
             default:
                 cont_my = cur_cont;
                 break;
